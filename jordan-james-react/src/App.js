@@ -15,7 +15,8 @@ class App extends Component {
       number: 0,
       min: 0,
       max: data.length,
-      name: ''
+      name: '',
+      comments: 'this is the best website ever'
     };
   }
 
@@ -24,6 +25,13 @@ class App extends Component {
     
   }
 
+  handleNameInput(username){
+    this.setState({name: username})
+  }
+
+  handleCommentInput(comments){
+    this.setState({comments: comments})
+  }
   handleButtonClick(increment){
       //1 test if min has been reached
        if((this.state.number === this.state.min) && increment=== -1){
@@ -62,7 +70,7 @@ class App extends Component {
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
       <Button which={'next'} value={1} onClick={(e) => this.handleButtonClick(e)}/>
       </div>
-      <Form onSubmit={(e) => this.handleFormSubmit(e)}/>
+      <Form onSubmit={(e) => this.handleFormSubmit(e)} uservalue={(e)=>this.handleNameInput(e)} usercomment={(e)=>this.handleCommentInput(e)}/>
       </div>
     );
   }
