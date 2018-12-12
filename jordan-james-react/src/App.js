@@ -10,12 +10,23 @@ class App extends Component {
     super(props);
 
     this.state={
-      number: 0
+      number: 0,
+      min: 0,
+      max: data.length
     };
   }
 
-  handleButtonClick(){
-    console.log('hello i have been clicked!!!')
+  handleButtonClick(increment){
+    this.setState(()=>{
+      //1 test if min or max have been reached
+       if(((this.state.number === this.state.min) && increment=== -1) || ((this.state.number === this.state.max -1)&& increment === 1)){
+        console.log("boundary reached");
+       }
+      //2 otherwise set new state
+      else {
+        this.setState({number : this.state.number + increment});
+      }
+    })
   }
 
   render() {
@@ -31,8 +42,8 @@ class App extends Component {
       <Image image={data[this.state.number]}/>
 
       <div>
-      <Button which={'prev'} onClick={() => this.handleButtonClick()}/>
-      <Button which={'next'} onClick={() => this.handleButtonClick()}/>
+      <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
+      <Button which={'next'} value={1} onClick={(e) => this.handleButtonClick(e)}/>
       </div>
       </div>
     );
