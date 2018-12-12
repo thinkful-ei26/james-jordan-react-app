@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import image from './image-data';
- 
-
+import Image from './image';
+import Button from './button';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-         Here's an image: 
-        </header>
-        <img src={image}/>
+        Here's an image: 
+       
+      <Image />
+      <div>
+      <Button which={'prev'}/>
+      <Button which={'next'}/>
+      </div>
       </div>
     );
   }
