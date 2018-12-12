@@ -18,18 +18,17 @@ class App extends Component {
       max: data.length,
       name: '',
       comments: '',
-      submittedName: [''],
-      submittedComment: ['']
+      submittedName: [ {name: ''}, {name: ''},{name: ''},{name: ''},{name: ''},{name: ''}],
+      submittedComment: [{comment: ''},{comment: ''},{comment: ''},{comment: ''},{comment: ''},{comment: ''} ]
     };
   }
 
   handleFormSubmit() {
-    this.setState({
-      submittedName: this.state.name,
-      submittedComment: this.state.comments
-    })
+    this.setState({}, ()=>{ this.state.submittedName[this.state.number].name = this.state.name });
+    this.setState(()=>{ this.submittedComment[this.state.number].comment = this.state.comments });
   }
-
+   //submittedName[this.state.number] : this.state.name
+   //submittedComment: this.state.comments
   handleNameInput(username){
     this.setState({name: username})
   }
@@ -73,7 +72,7 @@ class App extends Component {
       <Subheader current={this.state.number} total={data.length}/>
       
       {/* the component for form-render */}
-      <FormRender name={this.state.submittedName} comment={this.state.submittedComment}/>
+      <FormRender name={this.state.submittedName[this.state.number].name} comment={this.state.submittedComment[this.state.number].comment}/>
 
       <div>
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
