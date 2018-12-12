@@ -48,7 +48,8 @@ class App extends Component {
 
   {/* create a method for onClick to add or minus 1 (from image number) */}
       <Header />
-      <Image image={data[this.state.number]}/>
+      <Image image={data[this.state.number].url}/>
+      <Subheader />
       <Subheader current={this.state.number} total={data.length}/>
       <div>
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
