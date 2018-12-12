@@ -1,7 +1,6 @@
 import React from 'react';
-import image from './image-data';
 
-export default function Image(){
-    return (<div><img src={image}/></div>);
-
+export default function Image(props){
+    return (<div><img src={props.image}/></div>);
+//onClick
 };
