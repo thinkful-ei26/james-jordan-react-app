@@ -5,6 +5,7 @@ import Button from './button';
 import data from './image-data';
 import Header from './header';
 import Subheader from './subheader';
+import Form from './form';
 
 class App extends Component {
   constructor(props){
@@ -13,8 +14,14 @@ class App extends Component {
     this.state={
       number: 0,
       min: 0,
-      max: data.length
+      max: data.length,
+      name: ''
     };
+  }
+
+  handleFormSubmit(name) {
+    console.log(name)
+    
   }
 
   handleButtonClick(increment){
@@ -55,6 +62,7 @@ class App extends Component {
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
       <Button which={'next'} value={1} onClick={(e) => this.handleButtonClick(e)}/>
       </div>
+      <Form onSubmit={(e) => this.handleFormSubmit(e)}/>
       </div>
     );
   }
