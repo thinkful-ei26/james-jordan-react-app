@@ -4,6 +4,7 @@ import Image from './image';
 import Button from './button';
 import data from './image-data';
 import Header from './header';
+import Subheader from './subheader';
 
 class App extends Component {
   constructor(props){
@@ -17,16 +18,24 @@ class App extends Component {
   }
 
   handleButtonClick(increment){
-    this.setState(()=>{
-      //1 test if min or max have been reached
-       if(((this.state.number === this.state.min) && increment=== -1) || ((this.state.number === this.state.max -1)&& increment === 1)){
-        console.log("boundary reached");
+      //1 test if min has been reached
+       if((this.state.number === this.state.min) && increment=== -1){
+        this.setState({
+          number: this.state.max -1
+        })
        }
-      //2 otherwise set new state
+
+      //2 test if it's reached max and then go back to the min && vice versa
+      else if((this.state.number === this.state.max -1) && increment === 1){
+        this.setState({
+          number: 0
+        })
+      }
+
+      //3 otherwise set new state
       else {
         this.setState({number : this.state.number + increment});
       }
-    })
   }
 
   render() {
@@ -40,7 +49,7 @@ class App extends Component {
   {/* create a method for onClick to add or minus 1 (from image number) */}
       <Header />
       <Image image={data[this.state.number]}/>
-
+      <Subheader current={this.state.number} total={data.length}/>
       <div>
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
       <Button which={'next'} value={1} onClick={(e) => this.handleButtonClick(e)}/>
