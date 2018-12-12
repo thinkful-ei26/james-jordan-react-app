@@ -6,6 +6,7 @@ import data from './image-data';
 import Header from './header';
 import Subheader from './subheader';
 import Form from './form';
+import FormRender from './form-render';
 
 class App extends Component {
   constructor(props){
@@ -16,13 +17,17 @@ class App extends Component {
       min: 0,
       max: data.length,
       name: '',
-      comments: 'this is the best website ever'
+      comments: '',
+      submittedName: [''],
+      submittedComment: ['']
     };
   }
 
-  handleFormSubmit(name) {
-    console.log(name)
-    
+  handleFormSubmit() {
+    this.setState({
+      submittedName: this.state.name,
+      submittedComment: this.state.comments
+    })
   }
 
   handleNameInput(username){
@@ -66,6 +71,10 @@ class App extends Component {
       <Image image={data[this.state.number].url}/>
       <Subheader caption={data[this.state.number].caption}/>
       <Subheader current={this.state.number} total={data.length}/>
+      
+      {/* the component for form-render */}
+      <FormRender name={this.state.submittedName} comment={this.state.submittedComment}/>
+
       <div>
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
       <Button which={'next'} value={1} onClick={(e) => this.handleButtonClick(e)}/>
