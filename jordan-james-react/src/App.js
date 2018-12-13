@@ -18,18 +18,27 @@ class App extends Component {
       max: data.length,
       name: '',
       comments: '',
-      submittedName: [''],
-      submittedComment: ['']
+      submittedName: '',
+      submittedComment:'',
+      newAndUniqueUser: {post : {}}
     };
+   
+    this.newAndUniqueUser = {post:{}};
   }
-
+  
   handleFormSubmit() {
-    this.setState({
-      submittedName: this.state.name,
-      submittedComment: this.state.comments
-    })
+  let newUser = 'newUser' + this.state.number.toString();
+  let newComment = 'newComment' + this.state.number.toString();
+  
+   this.newAndUniqueUser.post[newUser] = this.state.name;
+   this.newAndUniqueUser.post[newComment] = this.state.comments;
+   
+  let newAndUniqueUser = Object.assign({}, this.newAndUniqueUser);
+  let sigh = {newAndUniqueUser : newAndUniqueUser};
+  this.setState(sigh);
+    
+  
   }
-
   handleNameInput(username){
     this.setState({name: username})
   }
@@ -59,6 +68,8 @@ class App extends Component {
   }
 
   render() {
+    let currentUser = 'newUser' + this.state.number.toString();
+    let currentComment = 'newComment' + this.state.number.toString();
     return (
       <div className="App">
       
@@ -73,7 +84,7 @@ class App extends Component {
       <Subheader current={this.state.number} total={data.length}/>
       
       {/* the component for form-render */}
-      <FormRender name={this.state.submittedName} comment={this.state.submittedComment}/>
+      <FormRender name={this.state.newAndUniqueUser.post[currentUser]} comment={this.state.newAndUniqueUser.post[currentComment]}/>
 
       <div>
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
