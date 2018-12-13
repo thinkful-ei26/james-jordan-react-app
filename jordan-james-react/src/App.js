@@ -18,17 +18,27 @@ class App extends Component {
       max: data.length,
       name: '',
       comments: '',
-      submittedName: [ {name: ''}, {name: ''},{name: ''},{name: ''},{name: ''},{name: ''}],
-      submittedComment: [{comment: ''},{comment: ''},{comment: ''},{comment: ''},{comment: ''},{comment: ''} ]
+      submittedName: '',
+      submittedComment:'',
+      updatedObject: {post : {}}
     };
+   
   }
-
   handleFormSubmit() {
-    this.setState({}, ()=>{ this.state.submittedName[this.state.number].name = this.state.name });
-    this.setState(()=>{ this.submittedComment[this.state.number].comment = this.state.comments });
+  let newUser = 'user' + this.state.number.toString();
+  let newComment = 'comment' + this.state.number.toString();
+  let post = {};
+  
+    post[newUser] = this.state.name;
+    post[newComment] = this.state.comments;
+    
+  let newUpdate = Object.assign({}, this.state.updatedObject.post, post)
+  
+  this.setState(Object.assign(this.state.updatedObject.post, newUpdate));
+    
+  //  this.setState({submittedName : this.state.name});
+  //  this.setState({submittedComment: this.state.comments});
   }
-   //submittedName[this.state.number] : this.state.name
-   //submittedComment: this.state.comments
   handleNameInput(username){
     this.setState({name: username})
   }
@@ -58,6 +68,8 @@ class App extends Component {
   }
 
   render() {
+    let currentUser = 'user' + this.state.number.toString();
+    let currentComment = 'comment' + this.state.number.toString();
     return (
       <div className="App">
       
@@ -72,7 +84,7 @@ class App extends Component {
       <Subheader current={this.state.number} total={data.length}/>
       
       {/* the component for form-render */}
-      <FormRender name={this.state.submittedName[this.state.number].name} comment={this.state.submittedComment[this.state.number].comment}/>
+      <FormRender name={this.state.updatedObject.post[currentUser]} comment={this.state.updatedObject.post[currentComment]}/>
 
       <div>
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
