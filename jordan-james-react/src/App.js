@@ -20,24 +20,24 @@ class App extends Component {
       comments: '',
       submittedName: '',
       submittedComment:'',
-      updatedObject: {post : {}}
+      newAndUniqueUser: {post : {}}
     };
    
+    this.newAndUniqueUser = {post:{}};
   }
+  
   handleFormSubmit() {
-  let newUser = 'user' + this.state.number.toString();
-  let newComment = 'comment' + this.state.number.toString();
-  let post = {};
+  let newUser = 'newUser' + this.state.number.toString();
+  let newComment = 'newComment' + this.state.number.toString();
   
-    post[newUser] = this.state.name;
-    post[newComment] = this.state.comments;
+   this.newAndUniqueUser.post[newUser] = this.state.name;
+   this.newAndUniqueUser.post[newComment] = this.state.comments;
+   
+  let newAndUniqueUser = Object.assign({}, this.newAndUniqueUser);
+  let sigh = {newAndUniqueUser : newAndUniqueUser};
+  this.setState(sigh);
     
-  let newUpdate = Object.assign({}, this.state.updatedObject.post, post)
   
-  this.setState(Object.assign(this.state.updatedObject.post, newUpdate));
-    
-  //  this.setState({submittedName : this.state.name});
-  //  this.setState({submittedComment: this.state.comments});
   }
   handleNameInput(username){
     this.setState({name: username})
@@ -68,8 +68,8 @@ class App extends Component {
   }
 
   render() {
-    let currentUser = 'user' + this.state.number.toString();
-    let currentComment = 'comment' + this.state.number.toString();
+    let currentUser = 'newUser' + this.state.number.toString();
+    let currentComment = 'newComment' + this.state.number.toString();
     return (
       <div className="App">
       
@@ -84,7 +84,7 @@ class App extends Component {
       <Subheader current={this.state.number} total={data.length}/>
       
       {/* the component for form-render */}
-      <FormRender name={this.state.updatedObject.post[currentUser]} comment={this.state.updatedObject.post[currentComment]}/>
+      <FormRender name={this.state.newAndUniqueUser.post[currentUser]} comment={this.state.newAndUniqueUser.post[currentComment]}/>
 
       <div>
       <Button which={'prev'} value={-1} onClick={(e) => this.handleButtonClick(e)}/>
